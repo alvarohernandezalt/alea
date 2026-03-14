@@ -2,7 +2,7 @@
 
 Aplicacion de escritorio para composicion semi-aleatoria de audio. Toma archivos de audio, les aplica procesos (granulares, espectrales, efectos clasicos) y monta composiciones multipista usando metodos semi-aleatorios con control variable. El resultado se exporta como WAV o MP3.
 
-(c) Alvaro Hernandez Altozano 2026
+
 
 ---
 
@@ -142,5 +142,5 @@ La exportacion a MP3 requiere [FFmpeg](https://ffmpeg.org/) instalado y en el PA
 ---
 
 ## Licencia
+MIT
 
-(c) Alvaro Hernandez Altozano 2026. Todos los derechos reservados.
