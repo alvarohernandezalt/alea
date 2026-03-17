@@ -62,23 +62,31 @@ jobs:
           retention-days: 30
 
   build-macos-intel:
-    runs-on: macos-13  # Last Intel runner
+    runs-on: macos-latest  # ARM64 runner, cross-compile via Rosetta
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Install dependencies
+      - name: Install x86_64 Python 3.11 via Rosetta
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-          pip install pyinstaller
+          # Download and install x86_64 Python from python.org
+          curl -L -o python-installer.pkg "https://www.python.org/ftp/python/3.11.9/python-3.11.9-macos11.pkg"
+          sudo installer -pkg python-installer.pkg -target /
+          # The x86_64 Python is at /usr/local/bin/python3.11
+          # Verify it's x86_64
+          file /usr/local/bin/python3.11
+          arch -x86_64 /usr/local/bin/python3.11 --version
 
-      - name: Build with PyInstaller
-        run: pyinstaller aleatoric_composer.spec
+      - name: Install dependencies (x86_64)
+        run: |
+          arch -x86_64 /usr/local/bin/python3.11 -m pip install --upgrade pip
+          arch -x86_64 /usr/local/bin/python3.11 -m pip install -r requirements.txt
+          arch -x86_64 /usr/local/bin/python3.11 -m pip install pyinstaller
+
+      - name: Build with PyInstaller (x86_64)
+        run: |
+          arch -x86_64 /usr/local/bin/python3.11 -m PyInstaller aleatoric_composer.spec
+          # Verify binary is x86_64
+          file dist/AleatoricComposer.app/Contents/MacOS/AleatoricComposer
 
       - name: Create macOS ZIP preserving .app bundle
         run: cd dist && zip -r -y ../AleatoricComposer-macOS-Intel.zip AleatoricComposer.app
