@@ -25,3 +25,13 @@ Thumbs.db
 
 # Claude
 .claude/
+
+# Build artifacts (additional)
+.venv-build/
+*.zip
+dist-macos*/
+
+# Generated docs & internal work files
+docs/
+*.pdf
+GUI_LAYOUT_ACTUAL.png
