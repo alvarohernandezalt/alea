@@ -32,16 +32,16 @@ Thumbs.db
 *.zip
 dist-macos*/
 
-# Generated docs & internal work files
-docs/
+# Generated files
 *.pdf
 GUI_LAYOUT_ACTUAL.png
 
 # Design assets (internal)
 .design/
 
-# CDP binaries (external tools)
+# CDP binaries and raw data
 _cdp/
+docs/_cdp_raw/
 
 # draw.io temp files
 .$*.bkp
