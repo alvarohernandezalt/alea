@@ -54,11 +54,17 @@ SIZE_EXCLUDES = [
 
 ALL_EXCLUDES = NETWORK_EXCLUDES + PYSIDE6_EXCLUDES + SIZE_EXCLUDES
 
+# Include license.json if it exists alongside the spec file
+import os as _os
+_license_datas = []
+if _os.path.isfile('license.json'):
+    _license_datas.append(('license.json', '.'))
+
 a = Analysis(
     ['src/main.py'],
     pathex=['.'],
     binaries=[],
-    datas=[],
+    datas=_license_datas,
     hiddenimports=[
         'pedalboard',
         'soundfile',

@@ -49,3 +49,6 @@ docs/_cdp_raw/
 # draw.io temp files
 .$*.bkp
 .$*.dtmp
+
+# License files (contain HMAC signatures — never commit)
+license.json
